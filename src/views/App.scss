@@ -1,0 +1,76 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      height: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 8px;
+
+
+
+      .delete-button,
+      .cancel-button {
+        font-size: 14px;
+        background-color: red;
+        display: inline-block;
+        margin-left: 10px;
+        cursor: pointer;
+        color: #fff;
+        padding: 4px;
+      }
+
+      &.completed {
+        .title {
+          text-decoration: line-through;
+          color: #949494;
+        }
+      }
+
+      .edit,
+      .cancel-button {
+        display: none;
+      }
+    }
+
+    .editing {
+      .delete-button,
+      .title {
+        display: none;
+      }
+
+      .edit,
+      .cancel-button {
+        display: block;
+      }
+    }
+
+    li + li {
+      margin-top: 12px;
+    }
+  }
+}
+
+button.selected {
+  border-color: #646cff;
+}
+
+.filters {
+  list-style: none;
+  display: flex;
+}
+
+.filters li {
+  margin-right: 6px;
+}
