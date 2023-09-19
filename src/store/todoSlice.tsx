@@ -47,5 +47,10 @@ export const selectFilteredTodoList = ({ visibility, todoList }:any) => {
     return todoList.value.filter((todo:ITodoItem) => todo.completed === true);
   }
 };
+
+export const selectTodoById = (state:any, id:number) => {
+  return state.todoList.value.find((todo:ITodoItem) => todo.id === id);
+}
+
 export const { addTodo, removeTodo, updateTodo } = todoSlice.actions
 export default todoSlice.reducer

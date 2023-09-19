@@ -2,6 +2,8 @@ import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './counterSlice'
 import todoReducer from './todoSlice'
 import visibilityReducer from './visibilitySlice'
+import userReducer from './userSlice'
+
 import { todoStorage } from '../utils/todoStorage'
 
 const storageMiddleware = store => next => action => {
@@ -18,7 +20,8 @@ export const store = configureStore({
   reducer: {
     counter: counterReducer,
     todoList: todoReducer,
-    visibility: visibilityReducer
+    visibility: visibilityReducer,
+    user: userReducer
   },
   middleware: gDM => gDM({serializableCheck: false}).concat(storageMiddleware)
 })

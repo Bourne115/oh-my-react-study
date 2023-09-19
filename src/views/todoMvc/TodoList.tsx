@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
+
+import { Link } from "react-router-dom"
+
 import { removeTodo, updateTodo, selectFilteredTodoList } from "../../store/todoSlice"
 
 import type { ITodoItem } from "../../utils/todoStorage"
@@ -20,8 +23,8 @@ const TodoList = () => {
   }, [cacheTodo])
 
   const changeTodoStatus = (e: any, currentTodo: ITodoItem) => {
-    currentTodo.completed = e.target.checked
-    dispatch(updateTodo(currentTodo))
+    const completed = e.target.checked
+    dispatch(updateTodo({ completed, id: currentTodo.id}))
   }
 
   const onRemoveTodoItem = (currentTodo: ITodoItem) => {
@@ -120,6 +123,7 @@ const TodoList = () => {
                 cancel
               </button>
             </div>
+            <Link to={`/edit/${todo.id}`}>编辑</Link>
           </li>
         ))}
       </ul>
