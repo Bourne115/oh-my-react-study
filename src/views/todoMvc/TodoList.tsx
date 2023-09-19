@@ -1,13 +1,12 @@
 import { useState, useRef, useEffect } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { removeTodo, updateTodo, selectTodoList } from "../../store/todoSlice"
+import { removeTodo, updateTodo, selectFilteredTodoList } from "../../store/todoSlice"
 
-import { todoStorage } from '../../utils/todoStorage'
 import type { ITodoItem } from "../../utils/todoStorage"
 
 const TodoList = () => {
-  const todoList = useSelector(selectTodoList)
+  const todoList = useSelector(selectFilteredTodoList)
   const dispatch = useDispatch()
 
   let inputRef = useRef<HTMLInputElement>(null)
@@ -20,17 +19,13 @@ const TodoList = () => {
     }
   }, [cacheTodo])
 
-  useEffect(() => {
-    todoStorage.save(todoList)
-  }, [todoList])
-
   const changeTodoStatus = (e: any, currentTodo: ITodoItem) => {
     currentTodo.completed = e.target.checked
     dispatch(updateTodo(currentTodo))
   }
 
   const onRemoveTodoItem = (currentTodo: ITodoItem) => {
-    removeTodo(currentTodo.id)
+    dispatch(removeTodo(currentTodo.id))
   }
 
   const onEditTodo = (currentTodo: ITodoItem) => {

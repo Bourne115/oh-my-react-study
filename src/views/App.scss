@@ -3,6 +3,52 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  .addTodo {
+    input {
+      height: 32px;
+      width: 240px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  }
+
+  .filter-wrapper {
+    margin-top: 24px;
+
+    button {
+      background: #fff;
+      color: #333;
+      border: 1px solid #9f9f9f;
+    }
+  
+    button.selected {
+      background: #646cff;
+      color: #fff !important;
+      border: 1px solid #646cff;
+    }
+    
+    button:hover,
+    button:active,
+    button:focus {
+      border: 1px solid #646cff;
+      color: #646cff;
+      outline: none;
+    }
+
+    button + button {
+      margin-left: 24px;
+    }
+    
+    .filters {
+      list-style: none;
+      display: flex;
+    }
+    
+    .filters li {
+      margin-right: 6px;
+    }
+  }
   
   ul {
     list-style: none;
@@ -10,7 +56,7 @@
     padding: 0;
 
     li {
-      height: 24px;
+      height: 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -62,15 +108,3 @@
   }
 }
 
-button.selected {
-  border-color: #646cff;
-}
-
-.filters {
-  list-style: none;
-  display: flex;
-}
-
-.filters li {
-  margin-right: 6px;
-}

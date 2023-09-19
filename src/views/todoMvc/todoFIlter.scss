@@ -1,0 +1,19 @@
+.filter-wrapper {
+  margin-top: 24px;
+
+  button.selected,
+  button:hover,
+  button:active,
+  button:focus {
+    border-color: #646cff;
+  }
+  
+  .filters {
+    list-style: none;
+    display: flex;
+  }
+  
+  .filters li {
+    margin-right: 6px;
+  }
+}

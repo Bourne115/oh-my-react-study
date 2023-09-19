@@ -26,7 +26,9 @@ const  AddTodo = () => {
         height: "50px",
         marginTop: "20px",
       }}
+      className='addTodo'
     >
+      新增：
       <input
         className="new-todo"
         type="text"
