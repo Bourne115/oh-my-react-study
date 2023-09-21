@@ -1,4 +1,4 @@
-import { useParams, redirect, createBrowserRouter } from "react-router-dom";
+import { redirect, createBrowserRouter } from "react-router-dom";
 
 import App from "../views/App.tsx"
 import Login from "../views/login/index.tsx"
@@ -40,7 +40,7 @@ const router = createBrowserRouter(
     {
       path: "/edit/:id",
       element: <EditTodo />,
-      action:  editTodoAction,
+      // action:  editTodoAction,
     },
   ],
 )

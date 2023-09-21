@@ -1,16 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { todoStorage } from '../utils/todoStorage'
+// import { todoStorage } from '../utils/todoStorage'
 import type { ITodoItem } from '../utils/todoStorage'
 import VisibilityFilters from '../constants/VisibilityFilters'
 
 const initialState = {
-  value: todoStorage.fetch(),
+  value: [] as ITodoItem[],
 }
 
 const todoSlice = createSlice({
   name: 'todoList',
   initialState,
   reducers: {
+    setTodoList(state, action) {
+      const { payload: todoList } = action
+      state.value = todoList
+    },
     addTodo: (state, action) => {
       const { value: todoList } = state
       const { payload: title } = action
@@ -36,6 +40,7 @@ const todoSlice = createSlice({
     }
   }
 })
+
 export const selectTodoList = (state:any) => state.todoList.value
 
 export const selectFilteredTodoList = ({ visibility, todoList }:any) => {
@@ -52,5 +57,5 @@ export const selectTodoById = (state:any, id:number) => {
   return state.todoList.value.find((todo:ITodoItem) => todo.id === id);
 }
 
-export const { addTodo, removeTodo, updateTodo } = todoSlice.actions
+export const { addTodo, removeTodo, updateTodo, setTodoList } = todoSlice.actions
 export default todoSlice.reducer
