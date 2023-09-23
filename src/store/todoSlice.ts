@@ -36,7 +36,7 @@ const todoSlice = createSlice({
       const { value:todoList } = state
       const { payload: editTodo } = action
       const todo = todoList.find((todo:ITodoItem) => todo.id === editTodo.id);
-      Object.assign(todo, editTodo)
+      if(todo) Object.assign(todo, editTodo)
     }
   }
 })

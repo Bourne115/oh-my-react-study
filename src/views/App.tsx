@@ -3,16 +3,18 @@ import { useSelector, useDispatch } from "react-redux"
 import { useRequest } from 'ahooks'
 import { Suspense, useEffect } from "react"
 
-import { selectRole, setRole } from "../store/userSlice"
-import { setTodoList } from '../store/todoSlice'
+import { selectRole, setRole } from "@/store/userSlice"
+import { setTodoList } from '@/store/todoSlice'
 
-import reactLogo from "../assets/react.svg"
-import TodoList from "./todoMvc/TodoList"
-import AddTodo from "./todoMvc/AddTodo"
-import TodoFilter from "./todoMvc/TodoFilter"
-import Counter from "./demo/counter"
+import reactLogo from "@/assets/react.svg"
+
+import TodoList from "@/views/todoMvc/TodoList"
+import AddTodo from "@/views/todoMvc/AddTodo"
+import TodoFilter from "@/views/todoMvc/TodoFilter"
+import Counter from "@/views/demo/counter"
 
 import { todoStorage } from "@/utils/todoStorage"
+
 console.log(import.meta.env)
 import "./App.scss"
 
