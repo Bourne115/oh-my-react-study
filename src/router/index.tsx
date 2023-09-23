@@ -1,4 +1,6 @@
 import { redirect, createBrowserRouter } from "react-router-dom";
+import type { LazyRouteFunction } from "react-router-dom";
+import { lazy } from "react";
 
 import App from "../views/App.tsx"
 import Login from "../views/login/index.tsx"
@@ -8,6 +10,7 @@ import { updateTodo } from "../store/todoSlice";
 import { store } from '../store/index'
 import RequireAuth from "../utils/requireAuth.tsx"
 import ErrorPage from "../views/ErrorPage.tsx";
+const lazyApp = lazy(() => import('../views/App'));
 
 export async function editTodoAction(data: any) {
   // 获取表单数据
@@ -23,15 +26,28 @@ export async function editTodoAction(data: any) {
   // 操作成功重定向
   return redirect(`/`);
 }
-
 const router = createBrowserRouter(
   [
     {
       path: "/",
       element:  (
-        <RequireAuth><App /></RequireAuth>
+        <RequireAuth>
+          <App></App>
+        </RequireAuth>
       ),
+      handle: (data) => {
+        console.log(data)
+      },
       errorElement: <ErrorPage />,
+      loader: () => {
+        return 'loading...'
+      },
+      children: [
+        {
+          path: "/",
+          element: <App />,
+        },
+      ],
     },
     {
       path: "/login",

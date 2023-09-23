@@ -12,8 +12,8 @@ import AddTodo from "./todoMvc/AddTodo"
 import TodoFilter from "./todoMvc/TodoFilter"
 import Counter from "./demo/counter"
 
-import { todoStorage } from "../utils/todoStorage"
-
+import { todoStorage } from "@/utils/todoStorage"
+console.log(import.meta.env)
 import "./App.scss"
 
 const fetchTodoList = () => {
@@ -21,7 +21,7 @@ const fetchTodoList = () => {
     setTimeout(() => {
       resolve({
         data: {
-          records: todoStorage.fetch() ? [...todoStorage.fetch(), { id: 5464, title: 'test', completed: false}] : []
+          records: todoStorage.fetch()
         },
       })
     }
