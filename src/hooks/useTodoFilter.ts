@@ -4,7 +4,7 @@ import type { TodoListType } from '../utils/todoStorage'
 function useTodoFilter(todoList: TodoListType) {
   const [visibility, setVisibility] = useState('all')
   const filteredTodoList = useMemo(() => {
-    const strategies:Record<string, () => {}> = {
+    const strategies:Record<string, () => unknown> = {
       all: () => todoList,
       active: () => todoList.filter(todo => todo.completed === false),
       completed: () => todoList.filter(todo => todo.completed === true)

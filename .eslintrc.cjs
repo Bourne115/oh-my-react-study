@@ -63,5 +63,6 @@ module.exports = {
     "react/no-this-in-sfc": 0,
     "react/prop-types": 0,
     "react/display-name": "off",
+    "@typescript-eslint/no-explicit-any": "off",
   },
 }

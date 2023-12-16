@@ -1,16 +1,16 @@
 import { redirect, createBrowserRouter } from "react-router-dom";
-import type { LazyRouteFunction } from "react-router-dom";
-import { lazy } from "react";
+// import type { LazyRouteFunction } from "react-router-dom";
+// import { lazy } from "react";
 
-import App from "../views/App.tsx"
-import Login from "../views/login/index.tsx"
-import EditTodo from "../views/todoMvc/EditTodo.tsx"
+import App from "@/views/App.tsx"
+import Login from "@/views/login/index.tsx"
+import EditTodo from "@/views/todoMvc/EditTodo.tsx"
 
-import { updateTodo } from "../store/todoSlice";
-import { store } from '../store/index'
-import RequireAuth from "../utils/requireAuth.tsx"
-import ErrorPage from "../views/ErrorPage.tsx";
-const lazyApp = lazy(() => import('../views/App'));
+import { updateTodo } from "@/store/todoSlice";
+import { store } from '@/store/index'
+import RequireAuth from "@/utils/requireAuth.tsx"
+import ErrorPage from "@/views/ErrorPage.tsx";
+// const lazyApp = lazy(() => import('../views/App'));
 
 export async function editTodoAction(data: any) {
   // 获取表单数据
@@ -35,7 +35,7 @@ const router = createBrowserRouter(
           <App></App>
         </RequireAuth>
       ),
-      handle: (data) => {
+      handle: (data: any) => {
         console.log(data)
       },
       errorElement: <ErrorPage />,
@@ -59,6 +59,9 @@ const router = createBrowserRouter(
       // action:  editTodoAction,
     },
   ],
+  {
+    basename: "/",
+  }
 )
 
 export default router

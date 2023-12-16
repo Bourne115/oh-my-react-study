@@ -10,12 +10,13 @@ import reactLogo from "@/assets/react.svg"
 
 import TodoList from "@/views/todoMvc/TodoList"
 import AddTodo from "@/views/todoMvc/AddTodo"
-import TodoFilter from "@/views/todoMvc/TodoFilter"
+import TodoFilter from "@/views/todoMvc/todoFilter"
 import Counter from "@/views/demo/counter"
 
 import { todoStorage } from "@/utils/todoStorage"
+import { Button } from '@arco-design/web-react'
 
-console.log(import.meta.env)
+// console.log(import.meta.env)
 import "./App.scss"
 
 const fetchTodoList = () => {
@@ -57,6 +58,7 @@ function App() {
   }, [data])
   return (
     <div className="App">
+      <Button type="primary">hello arco</Button>
       <div>
         你好, {role}
         <button onClick={onLogout}>注销</button>
