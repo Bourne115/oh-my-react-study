@@ -123,7 +123,7 @@ const TodoList = () => {
                 cancel
               </button>
             </div>
-            <Link to={`/edit/${todo.id}`}>编辑</Link>
+            <Link to={`/home/todo/${todo.id}`}>编辑</Link>
           </li>
         ))}
       </ul>

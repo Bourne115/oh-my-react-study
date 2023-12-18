@@ -12,7 +12,7 @@ export default function Login() {
   const onLogin = () => {
     // 设置用户角色
     dispatch(setRole(role))
-    navigate("/", { 
+    navigate("/home", { 
       replace: true, 
       state: {
         from: "/login"

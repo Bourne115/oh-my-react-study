@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { selectTodoById, updateTodo } from "../../store/todoSlice"
 
 import type { ITodoItem } from "../../utils/todoStorage"
+import { useBearStore } from '@/zustand'
 
 const schema = yup.object({
   title: yup.string().required(),
@@ -18,6 +19,7 @@ type FormValues = yup.InferType<typeof schema>
 
 
 export default function EditTodo() {
+  const count = useBearStore(state => state.count)
   const { id } = useParams()
   const navigate = useNavigate()
   const todo = useSelector(
@@ -50,6 +52,7 @@ export default function EditTodo() {
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <p>我是counter的值：{ count }</p>
       <p>
         <label>
           <span>name: </span>
@@ -77,7 +80,7 @@ export default function EditTodo() {
       </p>
       <p>
         <button type="submit">保存</button>
-        <button type="button" onClick={() => navigate("/")}>
+        <button type="button" onClick={() => navigate("/home")}>
           取消
         </button>
       </p>

@@ -4,6 +4,10 @@ import { redirect, createBrowserRouter } from "react-router-dom";
 
 import App from "@/views/App.tsx"
 import Login from "@/views/login/index.tsx"
+import Home from "@/views/Home";
+import Counter from "@/views/demo/counter"
+import TodoMvc from '@/views/todoMvc'
+
 import EditTodo from "@/views/todoMvc/EditTodo.tsx"
 
 import { updateTodo } from "@/store/todoSlice";
@@ -26,39 +30,46 @@ export async function editTodoAction(data: any) {
   // 操作成功重定向
   return redirect(`/`);
 }
+
+
+const baseRoutes = [
+  {
+    path: "/",
+    element:  (
+      <RequireAuth>
+        <App></App>
+      </RequireAuth>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "home",
+        element: <Home />,
+        children: [
+          {
+            path: 'counter',
+            element: <Counter></Counter>
+          },
+          {
+            path: 'todo',
+            element: <TodoMvc></TodoMvc>,
+          },
+          {
+            path: "todo/:id",
+            element: <EditTodo />,
+          },
+        ]
+      }
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  }
+]
+
 const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element:  (
-        <RequireAuth>
-          <App></App>
-        </RequireAuth>
-      ),
-      handle: (data: any) => {
-        console.log(data)
-      },
-      errorElement: <ErrorPage />,
-      loader: () => {
-        return 'loading...'
-      },
-      children: [
-        {
-          path: "/",
-          element: <App />,
-        },
-      ],
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/edit/:id",
-      element: <EditTodo />,
-      // action:  editTodoAction,
-    },
-  ],
+  baseRoutes,
   {
     basename: "/",
   }

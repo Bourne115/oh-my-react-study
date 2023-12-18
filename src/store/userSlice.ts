@@ -6,7 +6,7 @@ export const userSlice = createSlice({
     name: '',
     email: '',
     photo: '',
-    role: ''
+    role: 'admin'
   },
   reducers: {
     login: (state, action) => {

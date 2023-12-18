@@ -1,7 +1,13 @@
-import { useRouteError } from "react-router-dom";
+import { useNavigate, useRouteError } from "react-router-dom";
+import { Button } from '@arco-design/web-react'
+
+type TError = {
+  data: any
+}
 
 export default function ErrorPage() {
-  const error = useRouteError();
+  const nav = useNavigate()
+  const error:TError = useRouteError();
   console.error(error);
 
   return (
@@ -11,6 +17,7 @@ export default function ErrorPage() {
       <p>
         <i>{error.data}</i>
       </p>
+      <Button onClick={() => nav('/')}>返回首页</Button>
     </div>
   );
 }
