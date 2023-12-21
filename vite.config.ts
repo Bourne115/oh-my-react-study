@@ -16,5 +16,5 @@ export default defineConfig({
       '@': '/src'
     },
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
-  }
+  },
 })

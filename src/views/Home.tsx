@@ -1,11 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Layout, Menu, Breadcrumb, Message, Avatar } from '@arco-design/web-react';
-import { IconHome, IconCalendar, IconCaretRight, IconCaretLeft } from '@arco-design/web-react/icon';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { 
+  IconHome, 
+  IconCalendar, 
+  IconCaretRight, 
+  IconCaretLeft,
+  IconAt
+} from '@arco-design/web-react/icon';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import ReactLogo from "@/assets/react.svg"
 
 const MenuItem = Menu.Item;
-const SubMenu = Menu.SubMenu;
 const Sider = Layout.Sider;
 const Header = Layout.Header;
 const Footer = Layout.Footer;
@@ -17,6 +22,8 @@ function Home () {
     changeCollapsed(!collapsed)
   };
   const navigate = useNavigate()
+  const location = useLocation()
+
   return (
     <>
       <Layout className='layout-collapse-demo'>
@@ -48,7 +55,7 @@ function Home () {
             }
             style={{ width: '100%' }}
           >
-            <MenuItem key='0_1' onClick={() => navigate('counter')}>
+            <MenuItem key='0_1' onClick={() => navigate('counter', { replace: true})}>
               <IconHome />
               计数器
             </MenuItem>
@@ -56,44 +63,14 @@ function Home () {
               <IconCalendar />
               TodoMvc
             </MenuItem>
-            <MenuItem key='0_3'>
-              <IconCalendar />
-              Menu 3
+            <MenuItem key='0_3' onClick={() => navigate('viewArco')}>
+              <IconAt />
+              Arco Demo
             </MenuItem>
-            <SubMenu
-              key='1'
-              title={
-                <span>
-                  <IconCalendar />
-                  Navigation 1
-                </span>
-              }
-            >
-              <MenuItem key='1_1'>Menu 1</MenuItem>
-              <MenuItem key='1_2'>Menu 2</MenuItem>
-              <SubMenu key='2' title='Navigation 2'>
-                <MenuItem key='2_1'>Menu 1</MenuItem>
-                <MenuItem key='2_2'>Menu 2</MenuItem>
-              </SubMenu>
-              <SubMenu key='3' title='Navigation 3'>
-                <MenuItem key='3_1'>Menu 1</MenuItem>
-                <MenuItem key='3_2'>Menu 2</MenuItem>
-                <MenuItem key='3_3'>Menu 3</MenuItem>
-              </SubMenu>
-            </SubMenu>
-            <SubMenu
-              key='4'
-              title={
-                <span>
-                  <IconCalendar />
-                  Navigation 4
-                </span>
-              }
-            >
-              <MenuItem key='4_1'>Menu 1</MenuItem>
-              <MenuItem key='4_2'>Menu 2</MenuItem>
-              <MenuItem key='4_3'>Menu 3</MenuItem>
-            </SubMenu>
+            <MenuItem key='0_4' onClick={() => navigate('stopWatch')}>
+              <IconAt />
+              stopWatch
+            </MenuItem>
           </Menu>
         </Sider>
         <Layout>
@@ -101,13 +78,11 @@ function Home () {
           <Layout style={{ padding: '0 24px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>App</Breadcrumb.Item>
             </Breadcrumb>
             <Content>
               <Outlet></Outlet>
             </Content>
-            <Footer>Footer</Footer>
+            <Footer>@copyright qile.com { location.pathname }</Footer>
           </Layout>
         </Layout>
       </Layout>

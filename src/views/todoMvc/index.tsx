@@ -58,7 +58,7 @@ function App() {
   }, [data])
   return (
     <div className="todoMvcIndex">
-      <Button type="primary" onClick={() => navigate('/counter')}>hello arco</Button>
+      <Button type="primary" onClick={() => navigate('/')}>hello arco</Button>
       <div>
         你好, {role}
         <button onClick={onLogout}>注销</button>

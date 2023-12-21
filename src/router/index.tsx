@@ -1,20 +1,22 @@
 import { redirect, createBrowserRouter } from "react-router-dom";
-// import type { LazyRouteFunction } from "react-router-dom";
-// import { lazy } from "react";
+import { lazy } from "react";
 
 import App from "@/views/App.tsx"
 import Login from "@/views/login/index.tsx"
-import Home from "@/views/Home";
-import Counter from "@/views/demo/counter"
-import TodoMvc from '@/views/todoMvc'
+import RequireAuth from "@/utils/requireAuth"
 
-import EditTodo from "@/views/todoMvc/EditTodo.tsx"
+
+const Home = lazy(() => import('@/views/Home'))
+const Counter = lazy(() => import('@/views/demo/counter'))
+const TodoMvc = lazy(() => import('@/views/todoMvc'))
+const EditTodo = lazy(() => import('@/views/todoMvc/EditTodo'))
+const ArcoDemoPage = lazy(() => import('@/views/demo/viewArcoComp'))
+const ErrorPage = lazy(() => import('@/views/ErrorPage'))
+const StopWatch = lazy(() => import('@/views/stopWatch'))
 
 import { updateTodo } from "@/store/todoSlice";
 import { store } from '@/store/index'
-import RequireAuth from "@/utils/requireAuth.tsx"
-import ErrorPage from "@/views/ErrorPage.tsx";
-// const lazyApp = lazy(() => import('../views/App'));
+
 
 export async function editTodoAction(data: any) {
   // 获取表单数据
@@ -58,6 +60,14 @@ const baseRoutes = [
             path: "todo/:id",
             element: <EditTodo />,
           },
+          {
+            path: 'viewArco',
+            element: <ArcoDemoPage> 123 </ArcoDemoPage>,
+          },
+          {
+            path: 'stopWatch',
+            element: <StopWatch></StopWatch>,
+          }
         ]
       }
     ],
