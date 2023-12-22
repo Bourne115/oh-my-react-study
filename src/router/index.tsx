@@ -4,11 +4,11 @@ import { lazy } from "react";
 import App from "@/views/App.tsx"
 import Login from "@/views/login/index.tsx"
 import RequireAuth from "@/utils/requireAuth"
+import Home from '@/views/Home'
+import TodoMvc from '@/views/todoMvc'
 
-
-const Home = lazy(() => import('@/views/Home'))
 const Counter = lazy(() => import('@/views/demo/counter'))
-const TodoMvc = lazy(() => import('@/views/todoMvc'))
+// const TodoMvc = lazy(() => import('@/views/todoMvc'))
 const EditTodo = lazy(() => import('@/views/todoMvc/EditTodo'))
 const ArcoDemoPage = lazy(() => import('@/views/demo/viewArcoComp'))
 const ErrorPage = lazy(() => import('@/views/ErrorPage'))

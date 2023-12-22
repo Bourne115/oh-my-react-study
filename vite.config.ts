@@ -17,4 +17,21 @@ export default defineConfig({
     },
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
   },
+  server: {
+    port: 3000,
+    proxy: {
+      '^/gateway': {
+        target: 'https://testobworkwx.hnlshm.com/',
+        changeOrigin: true,
+        configure: (proxy) => {
+          proxy.on('proxyReq', function (proxyReq) {
+            proxyReq.setHeader('Origin', 'http://localhost')
+            proxyReq.setHeader('Referer', 'http://localhost')
+            // console.log('getHeaders', proxyReq.getHeaders())
+            // proxyReq.pipe(req)
+          })
+        }
+      }
+    },
+  }
 })

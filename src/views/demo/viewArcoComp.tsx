@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, useMemo } from "react"
 import {
   Table,
   TableColumnProps,
@@ -9,6 +9,7 @@ import {
 } from "@arco-design/web-react"
 import { IconArrowRise, IconArrowFall } from "@arco-design/web-react/icon"
 import { useImmer } from "use-immer"
+import { getUserCollege } from "@/apis"
 
 const { Meta } = Card
 
@@ -24,39 +25,84 @@ interface IViewArcoCompProps {
 }
 type TViewArcoCompPropsWithChildren = React.PropsWithChildren<IViewArcoCompProps>
 
+type TGoods = {
+  title: string
+  resName: string,
+  resId: number
+} 
+
 
 function GoodsPages(props: TViewArcoCompPropsWithChildren) {
   const {
     className
   } = props 
+  const [count, setCount] = useImmer(0)
+
+  const [goodsList, setGoodsList] = useImmer<TGoods[]>([])
+  const countRef = useRef(count)
+  countRef.current = count
+
+  useEffect(() => {
+    requestGoodsList()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log('countRef.current', countRef.current)
+    }, 3000)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [])
+
+  useMemo(() => {
+    console.log('useMemo-goodsList')
+  }, [])
 
 
-  const [goodsList, setGoodsList] = useImmer([{ id: 1, title: '雷猴' }, { id: 2, title:'凤凰' }])
 
   const AddGoods = () => {
     setGoodsList((draft) => {
-      draft.push({ id: draft.length + 1, title: '新商品' })
+      draft.push({ resId: draft.length + 1, title: '新商品', resName: '新商品13' })
     })
   }
 
   const deleteGoods = (id: number) => {
     setGoodsList((draft) => {
-      draft.splice(draft.findIndex(item => item.id === id), 1)
+      draft.splice(draft.findIndex(item => item.resId === id), 1)
     })
   }
 
-  const editGoodsTitle = (newTitle: string, id: number) => {
+  const editGoodsTitle = (resName: string, id: number) => {
     setGoodsList((draft) => {
-      const target = draft.find((goods) => goods.id === id)
-      if(target) target.title = newTitle
+      const target = draft.find((goods) => goods.resId === id)
+      if(target) {
+        target.resName = resName
+      }
+    })
+  }
+
+  const requestGoodsList = () => {
+    getUserCollege().then((res) => {
+      console.log(res)
+      setGoodsList(() => {
+        return [...res.data]
+      })
     })
   }
   
+  const testC = () => {
+    setCount(() => {
+      return count + 1
+    })
+  }
 
   const GoodsList = goodsList.map((item) => {
     return (
       <Card
-        key={item.id}
+        key={item.resId}
         hoverable
         style={{ width: 360, margin: "0 16px 16px 0" }}
         className={className}
@@ -71,25 +117,25 @@ function GoodsPages(props: TViewArcoCompPropsWithChildren) {
         }
       >
         <Meta
-          title={item.title}
+          title={item.resName}
           description={
             <>
-              Card content <br /> Card content
+              { item.resId }
             </>
           }
         />
         <Input
-          value={item.title}
+          value={item.resName}
           style={{ width: '100%' }} 
           allowClear  
           placeholder='Please Enter something'
-          onChange={(title) => { editGoodsTitle(title, item.id) } }
+          onChange={(title) => { editGoodsTitle(title, item.resId) } }
         />
         <Button 
           type="primary" 
           status='danger'
           style={{ marginTop: '10px' }}
-          onClick={() => {deleteGoods(item.id)}}
+          onClick={() => {deleteGoods(item.resId)}}
         >
           Delete
         </Button>
@@ -99,6 +145,7 @@ function GoodsPages(props: TViewArcoCompPropsWithChildren) {
 
   return (
     <>
+      <Button onClick={testC}>click:{ count }</Button>
       <Button onClick={AddGoods} style={{marginBottom: '10px'}}>
         Add
       </Button>
