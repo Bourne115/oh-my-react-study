@@ -29,8 +29,7 @@ type TGoods = {
   title: string
   resName: string,
   resId: number
-} 
-
+}
 
 function GoodsPages(props: TViewArcoCompPropsWithChildren) {
   const {
@@ -53,10 +52,12 @@ function GoodsPages(props: TViewArcoCompPropsWithChildren) {
     }, 3000)
 
     return () => {
+      console.log('useEffect-goodsList-destroy')
       clearTimeout(timer)
     }
   }, [])
 
+  // useMemo 也能实现 useEffect 的一些功能
   useMemo(() => {
     console.log('useMemo-goodsList')
   }, [])
